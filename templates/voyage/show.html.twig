@@ -1,21 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	{{ voyage.titre }}
+{{ voyage.titre }}
 {% endblock %}
 
 {% block body %}
 
-	<div class="voyage-title" style="background-image: url({{ voyage.coverImage  }})">
+<div class="voyage-title" style="background-image: url({{ voyage.coverImage  }})">
 
-		<div class="container">
-			<h1 class="text-center text-white">Voyage en
-				{{voyage.lieu}}</h1>
-
-		</div>
+	<div class="container">
+		<h1 class="text-center text-white">Voyage en
+			{{voyage.lieu}}</h1>
 
 	</div>
-	<div class="container">
+
+</div>			
+<div class="container">
 	<p class="h2 text-center">
 		<strong>
 			du
@@ -27,25 +27,32 @@
 
 
 
-		<h1>{{ voyage.titre }}</h1>
+	<h1>{{ voyage.titre }}</h1>
 
-		<a href="#" class="btn btn-outline-success">En savoir plus</a>
+	<a href="#" class="btn btn-outline-success">En savoir plus</a>
 
 
-	</div>
+</div>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 mb-3">
-      
-      </div>
-			<div class="col">
-				<div class="row">
-					<div class="col-4">
-          <img src="http://placehold.it/64x64" alt="avatar">
-          </div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 mb-3">
+
+		</div>
+		<div class="col">
+			<div class="row">
+				<div class="col-4">
+					<img src="http://placehold.it/64x64" alt="avatar">
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div>
+	{{voyage.lieu}}
+
+</div>
+
+
 {% endblock %}
