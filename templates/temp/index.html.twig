@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VoyageController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1>Vos voyages</h1>
+		<a href="{{ path('voyage_new') }}" class="btn btn-outline-success">Créer un nouveau voyage</a>
+		<div class="row">
+
+			{%for travel in voyage %}
+				<div class="col-lg-3 m-3">
+					<div class="card scroll" style="width: 18rem;">
+						<a href="{{ path('voyage_show', {'slug': travel.slug }) }}">
+							<img class="card-img-top" src="{{ travel.coverImage }}" alt="Card image cap">
+						</a>
+						<div class="card-body">
+							<h5 class="card-title">{{ travel.titre  }}</h5>
+							<p class="card-text">{{ travel.description | raw }}</p>
+							<a href="{{ path('voyage_show', { 'slug': travel.slug }) }}" class="btn btn-primary">En savoir plus</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

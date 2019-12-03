@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+test carte
+{% endblock %}
+
+{% block body %}
+
+
+
+	<div class="container">
+		<h1 class="text-center text-white">Voyage en
+			{{voyage.lieu}}</h1>
+
+
+
+
+
+        <div id="maCarte">
+	    <!-- Ici s'affichera la carte -->
+	</div>
+	</div>
+        <!-- Fichiers Javascript -->
+	<script type="text/javascript">
+            // On initialise la latitude et la longitude de Paris (centre de la carte)
+            var lat = 48.852969;
+            var lon = 2.349903;
+          
+            // Fonction d'initialisation de la carte
+            function initMap() {
+                // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "maCarte"
+               var carte = L.map('maCarte').setView([lat, lon], 3);
+                // Leaflet 
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      
+                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                    minZoom: 1,
+                    maxZoom: 20
+                }).addTo(carte);
+
+                var marker = L.marker([lat, lon]).addTo(carte);
+            }
+            window.onload = function(){
+		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+		initMap(); 
+            };
+        </script>
+
+
+	{{voyage.lieu}}
+
+{% endblock %}
+
+{% block Javascripts %}
+
+
+{% endblock %}

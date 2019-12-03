@@ -1,58 +1,30 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}
-{{ voyage.titre }}
-{% endblock %}
+{% block title %}Voyage{% endblock %}
 
 {% block body %}
-
-<div class="voyage-title" style="background-image: url({{ voyage.coverImage  }})">
-
-	<div class="container">
-		<h1 class="text-center text-white">Voyage en
-			{{voyage.lieu}}</h1>
-
-	</div>
-
-</div>			
 <div class="container">
-	<p class="h2 text-center">
-		<strong>
-			du
-			{{voyage.depart|date('d/m/Y')}}
-			au
-			{{voyage.retour|date('d/m/Y')}}</strong>
-	</p>
-	<p>{{voyage.description|raw}}</p>
+<h1>Voyage</h1>
+<div class="card">
 
 
+  {{ voyage.titre }}
+  {{ voyage.lieu }}
 
-	<h1>{{ voyage.titre }}</h1>
+  {{ voyage.description|raw }}
 
-	<a href="#" class="btn btn-outline-success">En savoir plus</a>
+  {{ voyage.depart ? voyage.depart|date('d-m-Y') : '' }}
+
+  {{ voyage.retour ? voyage.retour|date('d-m-Y') : '' }}
 
 
+  <a href="{{ path('voyage_index') }}">back to list</a>
+
+  <a href="{{ path('voyage_edit', {'slug': voyage.slug}) }}">edit</a>
+
+  <a href="{{ path('voyage_delete', {'slug': voyage.slug}) }}">Suppression</a>
+
+  {{ include('voyage/_delete_form.html.twig') }}
 </div>
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 mb-3">
-
-		</div>
-		<div class="col">
-			<div class="row">
-				<div class="col-4">
-					<img src="http://placehold.it/64x64" alt="avatar">
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
-
-<div>
-	{{voyage.lieu}}
-
-</div>
-
-
-{% endblock %}
+  {% endblock %}

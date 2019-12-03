@@ -1,28 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello VoyageController!
-{% endblock %}
+{% block title %}Voyage index{% endblock %}
 
 {% block body %}
+    <h1>Voyage index</h1>
+<div class="container">
+<div class="row">
 
-	<div class="container">
-		<h1>Vos voyages</h1>
-		<div class="row">
+        {% for voyage in voyages %}
+          <div class="col-md-4">
+          <div class="card h-100">
+            <h3 class="card-header">Voyage en {{ voyage.lieu }}</h3>
+            <div class="card-body">
+              <h5 class="card-title"> Du {{ voyage.depart ? voyage.depart|date('Y-m-d') : '' }} au
+                {{ voyage.retour ? voyage.retour|date('Y-m-d') : '' }}</h5>
+              <h6 class="card-subtitle text-muted"></h6>
+            </div>
+            <img src="{{ voyage.coverImage }}" alt="image principale">
+            <div class="card-body">
+              <p class="card-text">{{ voyage.titre }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-body">
+              <a href="{{ path('voyage_show', {'slug': voyage.slug}) }}" class="card-link">Voir</a>
+              <a href="{{ path('voyage_edit', {'slug': voyage.slug}) }}" class="card-link">Editer</a>
+            </div>
+          </div>
+          </div>
 
-			{%for travel in voyage %}
-				<div class="col-lg-3 m-3">
-					<div class="card scroll" style="width: 18rem;">
-						<a href="{{ path('voyage_show', {'slug': travel.slug }) }}">
-							<img class="card-img-top" src="{{ travel.coverImage }}" alt="Card image cap">
-						</a>
-						<div class="card-body">
-							<h5 class="card-title">{{ travel.titre  }}</h5>
-							<p class="card-text">{{ travel.description | raw }}</p>
-							<a href="{{ path('voyage_show', { 'slug': travel.slug }) }}" class="btn btn-primary">En savoir plus</a>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	</div>
+        {% else %}
+
+               no records found
+
+        {% endfor %}
+</div>
+
+    <a href="{{ path('voyage_new') }}">Create new</a>
+</div>
 {% endblock %}

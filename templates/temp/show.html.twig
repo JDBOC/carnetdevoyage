@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ voyage.titre }}
+{% endblock %}
+
+{% block body %}
+
+<div class="voyage-title" style="background-image: url({{ voyage.coverImage  }})">
+
+	<div class="container">
+		<h1 class="text-center text-white">Voyage en
+			{{voyage.lieu}}</h1>
+
+	</div>
+
+</div>			
+<div class="container">
+	<p class="h2 text-center">
+		<strong>
+			du
+			{{voyage.depart|date('d/m/Y')}}
+			au
+			{{voyage.retour|date('d/m/Y')}}</strong>
+	</p>
+	<p>{{voyage.description|raw}}</p>
+
+
+
+	<h1>{{ voyage.titre }}</h1>
+
+	<a href="{{ path('voyage_map', { 'slug': voyage.slug }) }}" class="btn btn-outline-success">En savoir plus</a>
+
+
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 mb-3">
+
+		</div>
+		<div class="col">
+			<div class="row">
+				<div class="col-4">
+					<img src="http://placehold.it/64x64" alt="avatar">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="maCarte">
+
+
+</div>
+	{{voyage.lieu}}
+
+{% endblock %}
+
+{% block Javascripts %}
+<script>
+	var carte = L.map('maCarte').setView([51.505, -0.09], 13);
+
+	L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+		minZoom: 10,
+		maxZoom: 20
+	}).addTo(carte);
+</script>
+
+{% endblock %}

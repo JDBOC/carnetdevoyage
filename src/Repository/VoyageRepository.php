@@ -1,34 +1,34 @@
 <?php
 
-namespace App\Repository;
+  namespace App\Repository;
 
-use App\Entity\Voyage;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+  use App\Entity\Voyage;
+  use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+  use Doctrine\Common\Persistence\ManagerRegistry;
 
-/**
- * @method Voyage|null find($id, $lockMode = null, $lockVersion = null)
- * @method Voyage|null findOneBy(array $criteria, array $orderBy = null)
- * @method Voyage[]    findAll()
- * @method Voyage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class VoyageRepository extends ServiceEntityRepository
-{
+  /**
+   * @method Image|null find($id, $lockMode = null, $lockVersion = null)
+   * @method Image|null findOneBy(array $criteria, array $orderBy = null)
+   * @method Image[]    findAll()
+   * @method Image[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+   */
+  class VoyageRepository extends ServiceEntityRepository
+  {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Voyage::class);
+      parent::__construct($registry, Voyage::class);
     }
 
     // /**
-    //  * @return Voyage[] Returns an array of Voyage objects
+    //  * @return Image[] Returns an array of Image objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
+            ->orderBy('i.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -37,14 +37,14 @@ class VoyageRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Voyage
+    public function findOneBySomeField($value): ?Image
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
     */
-}
+  }
