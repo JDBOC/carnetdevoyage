@@ -19,25 +19,15 @@
     <p class="d-flex p-lg-5">
       {{ voyage.description|raw }}
     </p>
+    <h3></h3>
   </div>
 </div>
+<div class="row mt-md-5 justify-content-between">
+  <a href="{{ path('voyage_index') }}" class="btn btn-outline-secondary">retour à la liste</a>
 
-
-
-
-
-
-
-
-
-
-  <a href="{{ path('voyage_index') }}">back to list</a>
-
-  <a href="{{ path('voyage_edit', {'slug': voyage.slug}) }}">edit</a>
-
-  <a href="{{ path('voyage_delete', {'slug': voyage.slug}) }}">Suppression</a>
+  <a href="{{ path('voyage_edit', {'slug': voyage.slug}) }}" class="btn btn-outline-info">Editer</a>
 
   {{ include('voyage/_delete_form.html.twig') }}
 </div>
-
+  </div>
   {% endblock %}
