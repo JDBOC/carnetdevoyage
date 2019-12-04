@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Voyage;
+use App\Entity\Image;
 use App\Form\VoyageType;
+use App\Form\ImageType;
 use App\Repository\VoyageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,11 +37,20 @@ class VoyageController extends AbstractController
     public function new(Request $request): Response
     {
         $voyage = new Voyage();
+
+
+
         $form = $this->createForm(VoyageType::class, $voyage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($voyage->getImages () as $image){
+              $image->setVoyage ($voyage);
+              $entityManager->persist ($image);
+            }
+
             $entityManager->persist($voyage);
             $entityManager->flush();
 
@@ -47,7 +58,7 @@ class VoyageController extends AbstractController
         }
 
         return $this->render('voyage/new.html.twig', [
-            'voyage' => $voyage,
+
             'form' => $form->createView(),
         ]);
     }

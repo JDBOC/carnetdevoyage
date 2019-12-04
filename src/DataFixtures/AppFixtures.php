@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
                     ->setRetour($retour)
                     ->setCoverImage($faker->imageURL());
 
-            for ($j = 0; $j <= mt_rand(5, 10); $j++) {
+            for ($j = 0 , $jMax = mt_rand ( 5 , 10 ); $j <= $jMax; $j++) {
                 $image = new Image;
                 $image  ->setUrl($faker->imageUrl())
                         ->setCaption($faker->sentence())

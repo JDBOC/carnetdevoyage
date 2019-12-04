@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voyage index{% endblock %}
+{% block title %}Carnet de Voyage{% endblock %}
 
 {% block body %}
-    <h1>Voyage index</h1>
+    <h1 class="text-center text-black mt-lg-5">Mes voyages</h1>
 <div class="container">
-<div class="row">
+<div class="row mt-5">
 
         {% for voyage in voyages %}
           <div class="col-md-4">
-          <div class="card h-100">
+          <div class="card mb-3 mt-3 p-1 d-flex align-items-lg-stretch">
             <h3 class="card-header">Voyage en {{ voyage.lieu }}</h3>
             <div class="card-body">
               <h5 class="card-title"> Du {{ voyage.depart ? voyage.depart|date('Y-m-d') : '' }} au
@@ -26,8 +26,8 @@
               <li class="list-group-item">Vestibulum at eros</li>
             </ul>
             <div class="card-body">
-              <a href="{{ path('voyage_show', {'slug': voyage.slug}) }}" class="card-link">Voir</a>
-              <a href="{{ path('voyage_edit', {'slug': voyage.slug}) }}" class="card-link">Editer</a>
+              <a href="{{ path('voyage_show', {'slug': voyage.slug}) }}" class="btn btn-outline-dark">Voir</a>
+              <a href="{{ path('voyage_edit', {'slug': voyage.slug}) }}" class="btn btn-outline-danger">Editer</a>
             </div>
           </div>
           </div>
