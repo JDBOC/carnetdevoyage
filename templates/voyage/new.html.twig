@@ -1,44 +1,15 @@
 {% extends 'base.html.twig' %}
-{% form_theme form _self %}
+
+{% form_theme form 'partiels/_collection.html.twig' %}
+
 {% block title %}New Voyage{% endblock %}
 
 {% block body %}
   <div class="container">
     <h1 class="text-center">Nouveau Voyage</h1>
-
     {{ include('voyage/_form.html.twig') }}
-
     <a href="{{ path('voyage_index') }}">back to list</a>
   </div>
-{% endblock %}
-
-{% block _voyage_images_widget %}
-  <p>Téléchargez les photos du voyage</p>
-  <div class="form-group">
-    {{ form_widget(form) }}
-    <input type="hidden" id="widgets-counter" value="0">
-    <button type="button" id="add-image" class="btn btn-outline-primary">Ajouter une image</button>
-  </div>
-{% endblock %}
-
-{% block _voyage_images_entry_widget %}
-  <div class="form-group" id="block_{{ id }}">
-    <div class="row">
-      <div class="col-md-5">
-        {{ form_widget(form.url) }}
-      </div>
-      <div class="col-md-5">
-        {{ form_widget(form.caption) }}
-      </div>
-      <div class="col-md-2">
-        <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">X</button>
-      </div>
-    </div>
-  </div>
-{% endblock %}
-
-{% block _voyage_images_entry_row %}
-  {{ form_widget(form) }}
 {% endblock %}
 
 {% block javascripts %}

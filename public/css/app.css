@@ -1,5 +1,13 @@
+
+
 body{
-   background-color: moccasin;
+
+    background-color: moccasin;
+}
+
+.showContainer{
+    display: block;
+    vertical-align: middle;
 }
 
 .image{

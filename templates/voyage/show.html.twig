@@ -3,19 +3,32 @@
 {% block title %}Voyage{% endblock %}
 
 {% block body %}
-<div class="container">
-<h1>Voyage</h1>
-<div class="card">
+<div class="container showContainer">
+  <h1 class="text-center font-italic m-lg-5">Voyage en {{ voyage.lieu }}</h1>
 
 
-  {{ voyage.titre }}
-  {{ voyage.lieu }}
+<div class="row">
+  <div class="col-lg-5 bg-light">
+    <h3><strong>Du {{ voyage.depart ? voyage.depart|date('d-m-Y') : '' }} au  {{ voyage.retour ? voyage.retour|date('d-m-Y') : '' }}</strong></h3>
+    <p><strong>
+        {{ voyage.titre }}
+      </strong></p>
+    <img src="{{ voyage.coverImage }}" alt="" class="card-img mb-4">
+  </div>
+  <div class="col-lg-7">
+    <p class="d-flex p-lg-5">
+      {{ voyage.description|raw }}
+    </p>
+  </div>
+</div>
 
-  {{ voyage.description|raw }}
 
-  {{ voyage.depart ? voyage.depart|date('d-m-Y') : '' }}
 
-  {{ voyage.retour ? voyage.retour|date('d-m-Y') : '' }}
+
+
+
+
+
 
 
   <a href="{{ path('voyage_index') }}">back to list</a>
@@ -26,5 +39,5 @@
 
   {{ include('voyage/_delete_form.html.twig') }}
 </div>
-</div>
+
   {% endblock %}
