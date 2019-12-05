@@ -16,9 +16,15 @@
     <img src="{{ voyage.coverImage }}" alt="" class="card-img mb-4">
   </div>
   <div class="col-lg-7">
-    <p class="d-flex p-lg-5">
+    <p class="d-flex">
       {{ voyage.description|raw }}
     </p>
+    <div class="text-center">
+    <a href="{{ path('voyage_etapes', {'slug': voyage.slug}) }}">
+      {{ voyage.etapes|length }} étapes pour ce voyage en {{ voyage.lieu }}
+    </a>
+    </div>
+
     <h3></h3>
   </div>
 </div>

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Etapes{% endblock %}
+
+{% block body %}
+    <h1>Edit Etapes</h1>
+
+    {{ include('etapes/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('voyage_etapes', {'slug': voyage.slug}) }}">back to list</a>
+
+    {{ include('etapes/_delete_form.html.twig') }}
+{% endblock %}

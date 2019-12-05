@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 
+use App\Entity\Etapes;
+use Cocur\Slugify\Slugify;
 use Faker\Factory;
 use App\Entity\Image;
 use App\Entity\Voyage;
@@ -14,37 +16,55 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('FR - fr');
-
+        $slugify = new Slugify();
 
         for ($i = 0; $i <= 10; $i++) {
-            $voyage = new Voyage;
+          $voyage = new Voyage;
 
-            $title = $faker->sentence();
+          $title = $faker->sentence ();
+          $slug = $slugify->slugify ( $title );
+          $description = '<p>' . join ( '</p><p>' , $faker->paragraphs ( 5 ) ) . '</p>';
+          $duration = mt_rand ( 3 , 21 );
 
-            $description = '<p>' . join('</p><p>', $faker->paragraphs(4)) . '</p>';
+          $depart = $faker->dateTimeBetween ( '-19 years' );
+          $retour = (clone $depart)->modify ( "+$duration days" );
 
-            $duration = mt_rand(3, 21);
+          $voyage->setTitre ( $title )
+            ->setSlug ( $slug )
+            ->setLieu ( $faker->country )
+            ->setDescription ( $description )
+            ->setDepart ( $depart )
+            ->setRetour ( $retour )
+            ->setCoverImage ( $faker->imageURL () );
 
-            $depart = $faker->dateTimeBetween('-19 years');
-            $retour = (clone $depart)->modify("+$duration days");
+          $manager->persist ( $voyage );
 
-            $voyage ->setTitre($title)
-                    ->setLieu($faker->country)
-                    ->setDescription($description)
-                    ->setDepart($depart)
-                    ->setRetour($retour)
-                    ->setCoverImage($faker->imageURL());
+          for ($k = 0 , $kMax = mt_rand ( 3 , 10 ); $k <= $kMax; $k++) {
+            $etape = new Etapes();
+            $title = $faker->sentence ();
+            $slug = $slugify->slugify ( $title );
+            $dateEtape = $faker->dateTimeBetween ( $depart , $retour );
+            $etape->setTitre ( $title )
+              ->setSlug ( $slug )
+              ->setLieu ( "lieu de l'étape" )
+              ->setDate ( $dateEtape )
+              ->setVoyage ( $voyage )
+              ->setDescription ( $description );
 
-            for ($j = 0 , $jMax = mt_rand ( 5 , 10 ); $j <= $jMax; $j++) {
-                $image = new Image;
-                $image  ->setUrl($faker->imageUrl())
-                        ->setCaption($faker->sentence())
-                        ->setVoyage($voyage);
+            $manager->persist ( $etape );
+          }
 
-                $manager->persist($image);
-            }
+          for ($j = 0 , $jMax = mt_rand ( 5 , 10 ); $j <= $jMax; $j++) {
+            $image = new Image;
+            $image->setUrl ( $faker->imageUrl () )
+              ->setCaption ( $faker->sentence () )
+              ->setVoyage ( $voyage )
+              ->setEtapes ( $etape );
 
-            $manager->persist($voyage);
+            $manager->persist ( $image );
+          }
+
+
         }
 
         $manager->flush();

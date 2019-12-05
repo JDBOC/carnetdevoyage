@@ -60,9 +60,15 @@ class Voyage
      */
     private $coverImage;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Etapes", mappedBy="voyage")
+     */
+    private $etapes;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->etapes = new ArrayCollection();
     }
 
     /**
@@ -197,6 +203,37 @@ class Voyage
     public function setCoverImage(?string $coverImage): self
     {
         $this->coverImage = $coverImage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Etapes[]
+     */
+    public function getEtapes(): Collection
+    {
+        return $this->etapes;
+    }
+
+    public function addEtape(Etapes $etape): self
+    {
+        if (!$this->etapes->contains($etape)) {
+            $this->etapes[] = $etape;
+            $etape->setVoyage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtape(Etapes $etape): self
+    {
+        if ($this->etapes->contains($etape)) {
+            $this->etapes->removeElement($etape);
+            // set the owning side to null (unless already changed)
+            if ($etape->getVoyage() === $this) {
+                $etape->setVoyage(null);
+            }
+        }
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +31,32 @@ class Image
      * @ORM\ManyToOne(targetEntity="App\Entity\Voyage", inversedBy="images")
      */
     private $voyage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etapes", inversedBy="image")
+     */
+    private $etapes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
+  /**
+   * Initialize Slug
+   *
+   * @ORM\PrePersist
+   * @ORM\PreUpdate
+   *
+   * @return void
+   */
+  public function initializeSlug()
+  {
+    if(empty($this->slug)){
+      $slugify = new Slugify();
+      $this->slug = $slugify->Slugify($this->caption);
+    }
+  }
 
     public function getId(): ?int
     {
@@ -68,6 +95,30 @@ class Image
     public function setVoyage(?Voyage $voyage): self
     {
         $this->voyage = $voyage;
+
+        return $this;
+    }
+
+    public function getEtapes(): ?Etapes
+    {
+        return $this->etapes;
+    }
+
+    public function setEtapes(?Etapes $etapes): self
+    {
+        $this->etapes = $etapes;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

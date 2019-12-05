@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Voyage;
 use App\Entity\Image;
+use App\Entity\Etapes;
 use App\Form\VoyageType;
 use App\Form\ImageType;
+use App\Repository\EtapesRepository;
 use App\Repository\VoyageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,6 +76,22 @@ class VoyageController extends AbstractController
             'voyage' => $voyage,
         ]);
     }
+
+  /**
+   * @Route("/{slug}/etapes", name="voyage_etapes")
+   *
+   */
+    public function showEtapes(Voyage $voyage, EtapesRepository $etapesRepository){
+      $etapes = $etapesRepository->findByVoyage ($voyage);
+
+      return $this->render ('etapes/index.html.twig', [
+        'voyage' => $voyage,
+        'etapes' => $etapes,
+
+      ]);
+    }
+
+
 
   /**
    * @Route("/{slug}/edit", name="voyage_edit", methods={"GET","POST"})
