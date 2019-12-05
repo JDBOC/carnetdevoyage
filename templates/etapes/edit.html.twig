@@ -7,7 +7,7 @@
 
     {{ include('etapes/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('voyage_etapes', {'slug': voyage.slug}) }}">back to list</a>
+    <a href="{{ path('voyage_etapes', {'slug': etape.voyage.slug}) }}">Retour à la liste des étapes</a>
 
     {{ include('etapes/_delete_form.html.twig') }}
 {% endblock %}

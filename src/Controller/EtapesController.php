@@ -75,15 +75,17 @@ class EtapesController extends AbstractController
     {
         $form = $this->createForm(EtapesType::class, $etape);
         $form->handleRequest($request);
-        $voyage = $etape->getVoyage ();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('voyage_etapes');
+            return $this->redirectToRoute('etapes_show', [
+              'slug' => $etape->getSlug ()
+            ]);
         }
 
         return $this->render('etapes/edit.html.twig', [
-            'voyage' => $voyage,
+
             'etape' => $etape,
             'form' => $form->createView(),
         ]);
