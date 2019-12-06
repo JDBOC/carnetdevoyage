@@ -24,7 +24,7 @@ class EtapesType extends AbstractType
             ->add('description')
             ->add ('voyage', EntityType::class, [
               'class' => Voyage::class,
-              'choice_label' => 'id'
+              'choice_label' => 'lieu'
 
             ])
         ;
