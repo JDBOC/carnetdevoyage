@@ -12,11 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * @Route("/etapes")
+ */
 class EtapesController extends AbstractController
 {
     /**
-     * @Route("/etapes/", name="etapes_index", methods={"GET"})
+     * @Route("/", name="etapes_index", methods={"GET"})
      */
     public function index(EtapesRepository $etapesRepository): Response
     {
@@ -27,7 +29,7 @@ class EtapesController extends AbstractController
     }
 
     /**
-     * @Route("/voyage/{slug}/etapes/new", name="etapes_new", methods={"GET","POST"})
+     * @Route("/new", name="etapes_new", methods={"GET","POST"})
      */
     public function new(Request $request, VoyageRepository $repository): Response
     {
@@ -46,7 +48,6 @@ class EtapesController extends AbstractController
         }
 
         return $this->render('etapes/new.html.twig', [
-
             'etape' => $etape,
             'form' => $form->createView(),
         ]);
@@ -55,7 +56,7 @@ class EtapesController extends AbstractController
 
 
     /**
-     * @Route("/etapes/{slug}", name="etapes_show", methods={"GET"})
+     * @Route("/{slug}", name="etapes_show", methods={"GET"})
      */
     public function show(VoyageRepository $repository, Etapes $etapes): Response
     {
@@ -68,7 +69,7 @@ class EtapesController extends AbstractController
     }
 
     /**
-     * @Route("/etapes/{slug}/edit", name="etapes_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="etapes_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Etapes $etape): Response
     {
@@ -91,7 +92,7 @@ class EtapesController extends AbstractController
     }
 
     /**
-     * @Route("/etapes/{slug}", name="etapes_delete", methods={"DELETE"})
+     * @Route("/{slug}", name="etapes_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Etapes $etape): Response
     {

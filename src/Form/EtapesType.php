@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Etapes;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,8 +17,6 @@ class EtapesType extends AbstractType
             ->add('date')
             ->add('auteur')
             ->add('description')
-
-
 
         ;
     }
