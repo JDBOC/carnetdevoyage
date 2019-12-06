@@ -65,6 +65,12 @@ class Etapes
         $this->image = new ArrayCollection();
     }
 
+  public function __toString()
+  {
+    return $this->voyage;
+  }
+
+
   /**
    * Initialize Slug
    *

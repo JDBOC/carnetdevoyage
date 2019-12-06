@@ -71,12 +71,10 @@ class Voyage
         $this->etapes = new ArrayCollection();
     }
 
-    /**
+  /**
      * Initialize Slug
-     * 
      * @ORM\PrePersist
      * @ORM\PreUpdate
-     * 
      * @return void
      */
     public function initializeSlug()

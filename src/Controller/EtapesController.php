@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Etapes;
 use App\Entity\Voyage;
+use App\Form\EtapesModifType;
 use App\Form\EtapesType;
 use App\Repository\EtapesRepository;
 use App\Repository\VoyageRepository;
@@ -31,20 +32,24 @@ class EtapesController extends AbstractController
     /**
      * @Route("/new", name="etapes_new", methods={"GET","POST"})
      */
-    public function new(Request $request, VoyageRepository $repository): Response
+    public function new(Request $request): Response
     {
         $etape = new Etapes();
-        $voyage = $repository->findAll ();
+
         $form = $this->createForm(EtapesType::class, $etape);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $etape -> initializeSlug ();
+            $lieu = $etape->getVoyage () ;
+            $slugVoyage = $lieu->getSlug ();
             $entityManager->persist($etape);
             $entityManager->flush();
 
-            return $this->redirectToRoute('etapes_index');
+            return $this->redirectToRoute('voyage_etapes', [
+              'slug' => $slugVoyage
+            ]);
         }
 
         return $this->render('etapes/new.html.twig', [
@@ -73,7 +78,7 @@ class EtapesController extends AbstractController
      */
     public function edit(Request $request, Etapes $etape): Response
     {
-        $form = $this->createForm(EtapesType::class, $etape);
+        $form = $this->createForm(EtapesModifType::class, $etape);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

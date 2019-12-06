@@ -40,8 +40,6 @@ class VoyageController extends AbstractController
     {
         $voyage = new Voyage();
 
-
-
         $form = $this->createForm(VoyageType::class, $voyage);
         $form->handleRequest($request);
 
@@ -52,15 +50,11 @@ class VoyageController extends AbstractController
               $image->setVoyage ($voyage);
               $entityManager->persist ($image);
             }
-
             $entityManager->persist($voyage);
             $entityManager->flush();
-
             return $this->redirectToRoute('voyage_index');
         }
-
         return $this->render('voyage/new.html.twig', [
-
             'form' => $form->createView(),
         ]);
     }
