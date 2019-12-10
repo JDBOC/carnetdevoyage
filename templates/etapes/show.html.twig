@@ -34,6 +34,10 @@
         </tbody>
     </table>
 
+    {% for images in etape %}
+        <img src="{{ images }}" alt="image {{ etape.image.iterator }}">
+    {% endfor %}
+
     <a href="{{ path('voyage_etapes', {'slug': etape.voyage.slug}) }}">Retour à la liste des étapes</a>
 
     <a href="{{ path('etapes_edit', {'slug': etape.slug}) }}">edit</a>

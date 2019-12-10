@@ -10,7 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VoyageType extends AbstractType
+class VoyageType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,7 +26,7 @@ class VoyageType extends AbstractType
             ])
 
             ->add('coverImage')
-          ->add ('images',
+            ->add ('images',
             CollectionType::class,
             [
               'entry_type' => ImageType::class,

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Carnet de Voyage{% endblock %}</title>
+
+
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <!--TEST LIENS LEAFLET POUR MAP-->
@@ -20,13 +22,20 @@
 
 <body>
     {% block header %}
-    {% include 'header.html.twig' %}
+
+        {% include 'header.html.twig' %}
+
     {% endblock %}
 
-    {% block body %}{% endblock %}
+    {% block body %}
+
+    {% endblock %}
+
+    <script src="{{ asset('js/header.js') }}"></script>
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/popper.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>

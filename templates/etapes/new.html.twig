@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Etapes{% endblock %}
-
+{% form_theme form 'partiels/_collectionEtapes.html.twig' %}
 {% block body %}
     <h1>Create new Etapes</h1>
 
     {{ include('etapes/_form.html.twig') }}
 
-    <a href="{{ path('etapes_index') }}">back to list</a>
+    <a href="{{ path('voyage_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/imageEtape.js') }}"></script>
 {% endblock %}

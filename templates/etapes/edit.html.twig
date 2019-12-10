@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% form_theme form 'partiels/_collectionEtapes.html.twig' %}
 {% block title %}Edit Etapes{% endblock %}
 
 {% block body %}
@@ -10,4 +10,8 @@
     <a href="{{ path('voyage_etapes', {'slug': etape.voyage.slug}) }}">Retour à la liste des étapes</a>
 
     {{ include('etapes/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/imageEtape.js') }}"></script>
 {% endblock %}

@@ -10,7 +10,7 @@
         {% for voyage in voyages %}
           <div class="col-md-4">
           <div class="card mb-3 mt-3 p-1 d-flex align-items-lg-stretch">
-            <h3 class="card-header">Voyage en {{ voyage.lieu }}</h3>
+            <h3 class="card-header text-center">{{ voyage.lieu }}</h3>
             <div class="card-body">
               <h5 class="card-title"> Du {{ voyage.depart ? voyage.depart|date('d-m-Y') : '' }} au
                 {{ voyage.retour ? voyage.retour|date('d-m-Y') : '' }}</h5>

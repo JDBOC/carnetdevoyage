@@ -6,11 +6,12 @@ use App\Entity\Etapes;
 use App\Entity\Voyage;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EtapesType extends AbstractType
+class EtapesType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,6 +28,11 @@ class EtapesType extends AbstractType
               'choice_label' => 'lieu'
 
             ])
+            ->add ('image', CollectionType::class, [
+              'entry_type' => ImageType::class,
+              'allow_add' => true,
+              'allow_delete' => true
+            ])
         ;
     }
 
@@ -34,6 +40,7 @@ class EtapesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Etapes::class,
+
         ]);
     }
 }
